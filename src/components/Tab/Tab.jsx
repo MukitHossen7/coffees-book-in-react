@@ -1,19 +1,25 @@
-const Tab = () => {
+import { NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
+
+const Tab = ({ categories }) => {
   return (
     <div className="pt-12">
       <div role="tablist" className="tabs tabs-lifted">
-        <a role="tab" className="tab">
-          Tab 1
-        </a>
-        <a role="tab" className="tab tab-active">
-          Tab 2
-        </a>
-        <a role="tab" className="tab">
-          Tab 3
-        </a>
+        {categories.map((categorie) => (
+          <NavLink
+            to="/cards"
+            key={categorie.id}
+            role="tab"
+            className="tab font-medium text-xl"
+          >
+            {categorie.category}
+          </NavLink>
+        ))}
       </div>
     </div>
   );
 };
-
+Tab.propTypes = {
+  categories: PropTypes.array,
+};
 export default Tab;
