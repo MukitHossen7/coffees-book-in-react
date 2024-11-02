@@ -25,6 +25,7 @@ const Home = () => {
       {/* coffee data dynamically */}
 
       <Outlet></Outlet>
+
       <button
         onClick={handleViewAll}
         className="btn bg-yellow-300 font-bold px-10 mt-10"

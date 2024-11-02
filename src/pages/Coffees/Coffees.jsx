@@ -1,7 +1,23 @@
+import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 
 const Coffees = () => {
   const allCoffees = useLoaderData();
+  const [coffeesData, setCoffeesData] = useState([]);
+  useEffect(() => {
+    if (coffeesData.length === 0) {
+      setCoffeesData(allCoffees);
+    }
+  }, [allCoffees, coffeesData]);
+
+  const handleSortPop = () => {
+    const sort = [...allCoffees].sort((a, b) => b.popularity - a.popularity);
+    setCoffeesData(sort);
+  };
+  const handleByRatting = () => {
+    const rating = [...allCoffees].sort((a, b) => b.rating - a.rating);
+    setCoffeesData(rating);
+  };
   return (
     <div className="">
       <div className="flex flex-col lg:flex-row items-end justify-between ">
@@ -9,16 +25,22 @@ const Coffees = () => {
           Sort Coffees by Popularity & Rating-&gt;{" "}
         </h2>
         <div className="flex gap-3">
-          <button className="btn bg-yellow-300 font-bold px-10 mt-10">
+          <button
+            onClick={handleSortPop}
+            className="btn bg-yellow-300 font-bold px-10 mt-10"
+          >
             Sort By Popularity
           </button>
-          <button className="btn bg-yellow-300 font-bold px-10 mt-10">
+          <button
+            onClick={handleByRatting}
+            className="btn bg-yellow-300 font-bold px-10 mt-10"
+          >
             Sort By Rating
           </button>
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-        {allCoffees.map((Coffee) => (
+        {coffeesData.map((Coffee) => (
           <div key={Coffee.id} className="card bg-base-100  shadow-xl">
             <figure>
               <img

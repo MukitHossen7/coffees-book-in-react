@@ -1,27 +1,57 @@
 import { useEffect, useState } from "react";
-import { useLoaderData, useParams } from "react-router-dom";
+import { Link, useLoaderData, useParams } from "react-router-dom";
+import Card from "../Card/Card";
 
-// import PropTypes from "prop-types";
 const CoffeeCard = () => {
   const { categories } = useParams();
   const data = useLoaderData();
-  const [coffees, setCoffees] = useState();
-  // console.log(coffeesData);
-  console.log(coffees);
+  const [coffees, setCoffees] = useState([]);
+
   useEffect(() => {
-    const filteredByCategory = [...data].filter(
-      (data) => data.categories === categories
-    );
-    setCoffees(filteredByCategory);
+    if (categories) {
+      const filteredByCategory = [...data].filter(
+        (data) => data.category === categories
+      );
+
+      setCoffees(filteredByCategory);
+    } else {
+      setCoffees(data.slice(0, 6));
+    }
   }, [data, categories]);
-  // const { name, category, type, origin, rating, popularity, image } = coffee;
+
   return (
     <div>
-      <h2>Card.... {categories}</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-14">
+        {coffees.map((coffee, idx) => (
+          <Link key={idx} to={`/details/${coffee.id}`}>
+            <Card coffee={coffee}></Card>
+          </Link>
+        ))}
+      </div>
+
+      {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
+        {[...data].slice(0, 6).map((coffeeObj, idx) => (
+          <div key={idx} className="card bg-base-100  shadow-xl">
+            <figure>
+              <img
+                src={coffeeObj.image}
+                alt="Shoes"
+                className="h-72 w-full object-cover rounded-lg"
+              />
+            </figure>
+            <div className="card-body">
+              <h2 className="card-title">Name: {coffeeObj.name}</h2>
+              <p>Category : {coffeeObj.category}</p>
+              <p>Type : {coffeeObj.type}</p>
+              <p>Origin : {coffeeObj.origin}</p>
+              <p>Ratting : {coffeeObj.rating}</p>
+              <p>Popular : {coffeeObj.popularity}</p>
+            </div>
+          </div>
+        ))}
+      </div> */}
     </div>
   );
 };
-// CoffeeCard.propTypes = {
-//   coffee: PropTypes.object,
-// };
+
 export default CoffeeCard;
