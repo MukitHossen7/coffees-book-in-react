@@ -3,19 +3,17 @@ import PropTypes from "prop-types";
 
 const Tab = ({ categories }) => {
   return (
-    <div className="pt-12">
-      <div role="tablist" className="tabs tabs-lifted">
-        {categories.map((categorie) => (
-          <NavLink
-            to="/cards"
-            key={categorie.id}
-            role="tab"
-            className="tab font-medium text-xl"
-          >
-            {categorie.category}
-          </NavLink>
-        ))}
-      </div>
+    <div role="tablist" className="tabs tabs-lifted mt-12 font-medium">
+      {categories.map((cate) => (
+        <NavLink
+          to={`/categories/${cate.category}`}
+          key={cate.id}
+          role="tab"
+          className="tab"
+        >
+          {cate.category}
+        </NavLink>
+      ))}
     </div>
   );
 };
