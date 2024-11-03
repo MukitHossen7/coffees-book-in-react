@@ -22,7 +22,7 @@ const DashBoard = () => {
   useEffect(() => {
     setIsDisplay(displayData);
   }, []);
-  console.log(isDisplay);
+
   return (
     <div className="pt-10">
       <div>

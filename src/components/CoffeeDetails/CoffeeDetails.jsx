@@ -1,16 +1,17 @@
 import { useLoaderData, useParams } from "react-router-dom";
 import nutrition from "../../assets/nutrition.png";
 import { setFavoriteCoffeeData } from "../../utilites/localStroageDB";
+import { useState } from "react";
 const CoffeeDetails = () => {
   const { coffeeId } = useParams();
   const coffeeDetails = useLoaderData();
-  console.log(coffeeDetails);
+  const [isFavorite, setIsFavorite] = useState(false);
   const findData = coffeeDetails.find(
     (coffeeData) => coffeeData.id === parseInt(coffeeId)
   );
-
   const handleFavoriteData = (data) => {
     setFavoriteCoffeeData(data);
+    setIsFavorite(true);
   };
 
   return (
@@ -29,6 +30,7 @@ const CoffeeDetails = () => {
           <p className="font-medium">Rating : {findData.rating}</p>
         </div>
         <button
+          disabled={isFavorite}
           onClick={() => handleFavoriteData(findData.id)}
           className="bg-yellow-300 font-semibold btn px-8"
         >

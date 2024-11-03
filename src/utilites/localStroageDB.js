@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+
 const getFavoriteCoffeeData = () => {
   const getCoffeeData = localStorage.getItem("fav-item");
   if (getCoffeeData) {
@@ -10,11 +12,12 @@ const getFavoriteCoffeeData = () => {
 const setFavoriteCoffeeData = (data) => {
   const setCoffeeData = getFavoriteCoffeeData();
   if (setCoffeeData.includes(data)) {
-    alert("Data aca");
+    toast.error("Already exits this items");
   } else {
     setCoffeeData.push(data);
     const coffeeDataStr = JSON.stringify(setCoffeeData);
     localStorage.setItem("fav-item", coffeeDataStr);
+    toast.success("Coffee added to favorite items");
   }
 };
 export { setFavoriteCoffeeData, getFavoriteCoffeeData };

@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
-
+import { Toaster } from "react-hot-toast";
 const MainLayouts = () => {
   return (
     <div className="w-11/12 mx-auto">
@@ -10,6 +10,7 @@ const MainLayouts = () => {
         <Outlet></Outlet>
       </div>
       <Footer></Footer>
+      <Toaster />
     </div>
   );
 };
