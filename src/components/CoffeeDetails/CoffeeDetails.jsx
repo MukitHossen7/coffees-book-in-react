@@ -1,5 +1,6 @@
 import { useLoaderData, useParams } from "react-router-dom";
 import nutrition from "../../assets/nutrition.png";
+import { setFavoriteCoffeeData } from "../../utilites/localStroageDB";
 const CoffeeDetails = () => {
   const { coffeeId } = useParams();
   const coffeeDetails = useLoaderData();
@@ -8,7 +9,10 @@ const CoffeeDetails = () => {
     (coffeeData) => coffeeData.id === parseInt(coffeeId)
   );
 
-  console.log(findData);
+  const handleFavoriteData = (data) => {
+    setFavoriteCoffeeData(data);
+  };
+
   return (
     <div className="pt-10">
       <h1 className="text-4xl font-light"> {findData.description} </h1>
@@ -24,7 +28,10 @@ const CoffeeDetails = () => {
           <p className="font-medium">Popularity: {findData.popularity}</p>
           <p className="font-medium">Rating : {findData.rating}</p>
         </div>
-        <button className="bg-yellow-300 font-semibold btn px-8">
+        <button
+          onClick={() => handleFavoriteData(findData.id)}
+          className="bg-yellow-300 font-semibold btn px-8"
+        >
           Add Favorite
         </button>
       </div>
