@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 const Coffees = () => {
   const allCoffees = useLoaderData();
@@ -40,24 +40,26 @@ const Coffees = () => {
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-        {coffeesData.map((Coffee) => (
-          <div key={Coffee.id} className="card bg-base-100  shadow-xl">
-            <figure>
-              <img
-                src={Coffee.image}
-                alt="Shoes"
-                className="h-72 w-full object-cover rounded-lg"
-              />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title">Name: {Coffee.name}</h2>
-              <p>Category : {Coffee.category}</p>
-              <p>Type : {Coffee.type}</p>
-              <p>Origin : {Coffee.origin}</p>
-              <p>Ratting : {Coffee.rating}</p>
-              <p>Popular : {Coffee.popularity}</p>
+        {coffeesData.map((Coffee, idx) => (
+          <Link key={idx} to={`/details/${Coffee.id}`}>
+            <div className="card bg-base-100  shadow-xl">
+              <figure>
+                <img
+                  src={Coffee.image}
+                  alt="Shoes"
+                  className="h-72 w-full object-cover rounded-lg"
+                />
+              </figure>
+              <div className="card-body">
+                <h2 className="card-title">Name: {Coffee.name}</h2>
+                <p>Category : {Coffee.category}</p>
+                <p>Type : {Coffee.type}</p>
+                <p>Origin : {Coffee.origin}</p>
+                <p>Ratting : {Coffee.rating}</p>
+                <p>Popular : {Coffee.popularity}</p>
+              </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
